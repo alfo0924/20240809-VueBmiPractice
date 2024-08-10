@@ -32,6 +32,7 @@ body{
     text-align: center;
     height: 200px;
     width: 200px;
+
 }
 
 
@@ -43,10 +44,11 @@ body{
 <div class=" container mt-5  d-flex justify-content-center align-items-center ">
 <div id="app">
     <p>Move the mouse pointer over the box below:</p>
+    <div >
+        <span>Weight ↔ : {{ xPos }} ㎏ </span><br><span>Height ↕ : {{ yPos }} ㎝ </span>
+    </div>
     <div class="ct2 d-flex justify-content-center align-items-center  mx-auto " v-on:mousemove="mousePos" v-bind:style="{backgroundColor:'hsl('+xPos+',80%,80%)'}" style="height: 200px;width: 200px;">
-        <div>
-            <span>xPos: {{ xPos }}</span><br><span>yPos: {{ yPos }}</span>
-        </div>
+
     </div>
 </div>
 </div>
@@ -66,7 +68,7 @@ body{
             return {
                 xPos: 0,
                 yPos: 0,
-                maxYPos: 100 // Set this to your desired maximum value
+                maxYPos: 200 // Set this to your desired maximum value
             }
         },
         methods: {
@@ -77,7 +79,7 @@ body{
                 this.xPos = event.offsetX;
 
                 // Calculate the inverted percentage (100% at top, 0% at bottom)
-                const invertedPercentage = (1 - (event.offsetY / height)) * 200;
+                const invertedPercentage = (1 - (event.offsetY / height)) * 100;
 
                 // Scale the percentage to the maxYPos
                 this.yPos = Math.round((invertedPercentage / 100) * this.maxYPos);
