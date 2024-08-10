@@ -56,6 +56,11 @@
 
             <label for="weightSlider" class="form-label">Weight: {{ sliderWeight }} kg</label>
             <input type="range" class="form-range" id="weightSlider" v-model="sliderWeight" min="30" max="180">
+
+            <p>
+                <strong>BMI: {{calculateBMI2}}</strong>
+            </p>
+
         </div>
 
         <button @click="calculateBMI" class="btn btn-primary mt-3" :disabled="!name">Calculate BMI</button>
@@ -90,6 +95,13 @@
                 ],
                 sliderHeight: 170,
                 sliderWeight: 70
+            }
+        },
+        computed: {
+            calculateBMI2() {
+                const heightInMeters = this.sliderHeight / 100;
+                const bmi = this.sliderWeight / (heightInMeters * heightInMeters);
+                return bmi.toFixed(1);
             }
         },
         methods: {
@@ -132,7 +144,8 @@
                 } else {
                     alert("All names have been used!");
                 }
-            }
+            },
+
         }
     })
     app.mount('#app')
