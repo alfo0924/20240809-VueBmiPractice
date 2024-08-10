@@ -29,12 +29,12 @@
 <div class="container mt-5 d-flex justify-content-center align-items-center">
     <div id="app">
 
-        <p class="mt-2">Move the mouse pointer over the box below and click to select height and weight:</p>
+        <p >Move the mouse pointer over the box below and click to select height and weight:</p>
         <div>
             <span>Current - Height ↕ : {{ yPos }} cm </span>
             <span>Current - Weight ↔ : {{ xPos }} kg </span><br>
         </div>
-        <div class="ct2 d-flex justify-content-center align-items-center mx-auto"
+        <div class="ct2 mt-3 d-flex justify-content-center align-items-center mx-auto"
              v-on:mousemove="mousePos"
              v-on:click="captureData"
              v-bind:style="{backgroundColor:'hsl('+xPos+',80%,80%)'}"
@@ -49,7 +49,7 @@
         <div class="mt-3">
             <div class="mb-3">
                 <input v-model="name" type="text" class="form-control" placeholder="Enter your name">
-                <button @click="generateName" class="btn btn-secondary mt-2">Generate Name</button>
+                <button @click="generateName" class="btn btn-secondary mt-3">Generate Name</button>
             </div>
             <label for="heightSlider" class="form-label">Height: {{ sliderHeight }} cm</label>
             <input type="range" class="form-range" id="heightSlider" v-model="sliderHeight" min="120" max="250">
