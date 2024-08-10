@@ -52,10 +52,10 @@
                 <button @click="generateName" class="btn btn-secondary mt-2">Generate Name</button>
             </div>
             <label for="heightSlider" class="form-label">Height: {{ sliderHeight }} cm</label>
-            <input type="range" class="form-range" id="heightSlider" v-model="sliderHeight" min="130" max="250">
+            <input type="range" class="form-range" id="heightSlider" v-model="sliderHeight" min="120" max="250">
 
             <label for="weightSlider" class="form-label">Weight: {{ sliderWeight }} kg</label>
-            <input type="range" class="form-range" id="weightSlider" v-model="sliderWeight" min="30" max="180">
+            <input type="range" class="form-range" id="weightSlider" v-model="sliderWeight" min="30" max="200">
 
             <p>
                 <strong>BMI: {{calculateBMI2}}</strong>
@@ -110,7 +110,7 @@
                 const height = rect.height;
                 const width = rect.width;
 
-                this.xPos = Math.round((event.offsetX / width) * 150) + 30; // Weight range: 30-180 kg
+                this.xPos = Math.round((event.offsetX / width) * 150) + 50; // Weight range: 30-180 kg
                 const invertedPercentage = (1 - (event.offsetY / height)) * 100;
                 this.yPos = Math.round((invertedPercentage / 100) * 120) + 130; // Height range: 130-250 cm
             },
