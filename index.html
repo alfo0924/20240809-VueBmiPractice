@@ -27,7 +27,7 @@
 <div class="container mt-5 mb-5 d-flex justify-content-center align-items-center">
     <div id="app">
 
-        <p>Move the mouse pointer over the box below and click to select height and weight:</p>
+        <p class="mt-5">Move the mouse pointer over the box below and click to select height and weight:</p>
         <div>
             <span>Current - Height ↕ : {{ yPos }} cm </span><br>
             <span>Current - Weight ↔ : {{ xPos }} kg </span>
@@ -53,6 +53,10 @@
 
             <label for="weightSlider" class="form-label">Weight: {{ sliderWeight }} kg</label>
             <input type="range" class="form-range" id="weightSlider" v-model="sliderWeight" min="30" max="180">
+            <p>
+
+                <br> BMI: {{calculateBMI}}<br>
+            </p>
         </div>
 
         <button @click="calculateBMI" class="btn btn-primary mt-3" :disabled="!name">Calculate BMI</button>
@@ -105,11 +109,11 @@
                 this.sliderHeight = this.clickedHeight;
                 this.sliderWeight = this.clickedWeight;
             },
-            calculateBMI() {
+           computed:{ calculateBMI() {
                 const heightInMeters = this.sliderHeight / 100;
                 this.bmi = this.sliderWeight / (heightInMeters * heightInMeters);
                 this.setBMICategory();
-            },
+            }},
             setBMICategory() {
                 if (this.bmi < 18.5) {
                     this.bmiCategory = 'Underweight';
@@ -129,7 +133,15 @@
                 } else {
                     alert("All names have been used!");
                 }
-            }
+            },
+            // computed: {
+            //     calculateBMI() {
+            //         const heightInMeters = this.sliderHeight / 100;
+            //         const bmi = this.sliderWeight / (heightInMeters * heightInMeters);
+            //         return bmi.toFixed(1);
+            //     }
+            // }
+
         }
     })
     app.mount('#app')
