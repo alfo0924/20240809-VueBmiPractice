@@ -28,6 +28,10 @@
 
 <div class="container mt-5 d-flex justify-content-center align-items-center">
     <div id="app">
+        <div class="mb-3">
+            <input v-model="name" type="text" class="form-control" placeholder="Enter your name">
+            <button @click="generateName" class="btn btn-secondary mt-2">Generate Name</button>
+        </div>
         <p>Move the mouse pointer over the box below and click to select height and weight:</p>
         <div>
             <span>Current - Weight ↔ : {{ xPos }} kg </span><br>
@@ -43,9 +47,9 @@
             <p>Selected - Height: {{ clickedHeight }} cm</p>
             <p>Selected - Weight: {{ clickedWeight }} kg</p>
         </div>
-        <button @click="calculateBMI" class="btn btn-primary mt-3" :disabled="!clickedHeight || !clickedWeight">Calculate BMI</button>
+        <button @click="calculateBMI" class="btn btn-primary mt-3" :disabled="!clickedHeight || !clickedWeight || !name">Calculate BMI</button>
         <div v-if="bmi" class="mt-3">
-            <h3>BMI Result</h3>
+            <h3>BMI Result for {{ name }}</h3>
             <p>Your BMI: {{ bmi.toFixed(2) }}</p>
             <p>Category: {{ bmiCategory }}</p>
         </div>
@@ -65,7 +69,14 @@
                 bmi: null,
                 bmiCategory: '',
                 clickedHeight: null,
-                clickedWeight: null
+                clickedWeight: null,
+                name: '',
+                names: [
+                    "Emma", "Liam", "Olivia", "Noah", "Ava", "Ethan", "Sophia", "Mason",
+                    "Isabella", "William", "Mia", "James", "Charlotte", "Benjamin", "Amelia",
+                    "Lucas", "Harper", "Henry", "Evelyn", "Alexander", "Abigail", "Michael",
+                    "Emily", "Daniel", "Elizabeth", "Jacob", "Sofia", "Logan", "Avery", "Jackson"
+                ]
             }
         },
         methods: {
@@ -96,6 +107,15 @@
                     this.bmiCategory = 'Overweight';
                 } else {
                     this.bmiCategory = 'Obese';
+                }
+            },
+            generateName() {
+                if (this.names.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * this.names.length);
+                    this.name = this.names[randomIndex];
+                    this.names.splice(randomIndex, 1);
+                } else {
+                    alert("All names have been used!");
                 }
             }
         }
