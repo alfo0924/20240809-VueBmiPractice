@@ -15,7 +15,15 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
-
+    background: #888888;
+}
+#app{
+    justify-content: center;
+    align-items: center;
+    border:solid 2px rgba(37, 36, 36, 0.92);
+    background: rgba(204, 204, 204, 0.67);
+    /*height: 200px;*/
+    /*width: 200px;*/
 }
 
 
@@ -25,13 +33,14 @@ body{
 </head>
 <body>
 
+<div class="  container mt-5  d-flex justify-content-center align-items-center ">
 <div id="app">
     <p>Move the mouse pointer over the box below:</p>
-    <div v-on:mousemove="mousePos">
+    <div class="ct1   justify-content-center align-items-center  " v-on:mousemove="mousePos" v-on:mousemove="mousePos" v-bind:style="{backgroundColor:'hsl('+xPos+',80%,80%)'}" style="height: 200px;width: 200px;">
         <span>xPos: {{ xPos }}</span><br><span>yPos: {{ yPos }}</span>
     </div>
 </div>
-
+</div>
 
 
 
