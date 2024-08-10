@@ -18,21 +18,23 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            height: 200px;
+            width: 200px;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-<div class="container mt-5 mb-5 d-flex justify-content-center align-items-center">
+<div class="container mt-5 d-flex justify-content-center align-items-center">
     <div id="app">
 
-        <p class="mt-5">Move the mouse pointer over the box below and click to select height and weight:</p>
+        <p>Move the mouse pointer over the box below and click to select height and weight:</p>
         <div>
-            <span>Current - Height ↕ : {{ yPos }} cm </span><br>
-            <span>Current - Weight ↔ : {{ xPos }} kg </span>
+            <span>Current - Height ↕ : {{ yPos }} cm </span>
+            <span>Current - Weight ↔ : {{ xPos }} kg </span><br>
         </div>
-        <div class="ct2 mt-2 d-flex justify-content-center align-items-center mx-auto"
+        <div class="ct2 d-flex justify-content-center align-items-center mx-auto"
              v-on:mousemove="mousePos"
              v-on:click="captureData"
              v-bind:style="{backgroundColor:'hsl('+xPos+',80%,80%)'}"
@@ -42,21 +44,18 @@
             <p>Selected - Height: {{ clickedHeight }} cm</p>
             <p>Selected - Weight: {{ clickedWeight }} kg</p>
         </div>
-        <div class="mt-2 mb-3">
-            <input v-model="name" type="text" class="form-control" placeholder="Enter your name">
-            <button @click="generateName" class="btn btn-secondary mt-2">Generate Name</button>
-        </div>
+
         <!-- New range sliders for height and weight -->
         <div class="mt-3">
+            <div class="mb-3">
+                <input v-model="name" type="text" class="form-control" placeholder="Enter your name">
+                <button @click="generateName" class="btn btn-secondary mt-2">Generate Name</button>
+            </div>
             <label for="heightSlider" class="form-label">Height: {{ sliderHeight }} cm</label>
             <input type="range" class="form-range" id="heightSlider" v-model="sliderHeight" min="130" max="250">
 
             <label for="weightSlider" class="form-label">Weight: {{ sliderWeight }} kg</label>
             <input type="range" class="form-range" id="weightSlider" v-model="sliderWeight" min="30" max="180">
-            <p>
-
-                <br> BMI: {{calculateBMI}}<br>
-            </p>
         </div>
 
         <button @click="calculateBMI" class="btn btn-primary mt-3" :disabled="!name">Calculate BMI</button>
@@ -109,11 +108,11 @@
                 this.sliderHeight = this.clickedHeight;
                 this.sliderWeight = this.clickedWeight;
             },
-           computed:{ calculateBMI() {
+            calculateBMI() {
                 const heightInMeters = this.sliderHeight / 100;
                 this.bmi = this.sliderWeight / (heightInMeters * heightInMeters);
                 this.setBMICategory();
-            }},
+            },
             setBMICategory() {
                 if (this.bmi < 18.5) {
                     this.bmiCategory = 'Underweight';
@@ -133,15 +132,7 @@
                 } else {
                     alert("All names have been used!");
                 }
-            },
-            // computed: {
-            //     calculateBMI() {
-            //         const heightInMeters = this.sliderHeight / 100;
-            //         const bmi = this.sliderWeight / (heightInMeters * heightInMeters);
-            //         return bmi.toFixed(1);
-            //     }
-            // }
-
+            }
         }
     })
     app.mount('#app')
