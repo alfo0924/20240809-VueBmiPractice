@@ -65,20 +65,26 @@ body{
         data() {
             return {
                 xPos: 0,
-                yPos: 0
+                yPos: 0,
+                maxYPos: 100 // Set this to your desired maximum value
             }
         },
         methods: {
             mousePos(event) {
-                this.xPos = event.offsetX
-                this.yPos = event.offsetY
+                const rect = event.target.getBoundingClientRect();
+                const height = rect.height;
+
+                this.xPos = event.offsetX;
+
+                // Calculate the inverted percentage (100% at top, 0% at bottom)
+                const invertedPercentage = (1 - (event.offsetY / height)) * 200;
+
+                // Scale the percentage to the maxYPos
+                this.yPos = Math.round((invertedPercentage / 100) * this.maxYPos);
             }
         }
     })
     app.mount('#app')
-
-
-
 </script>
 
 
