@@ -177,9 +177,32 @@
                 } else {
                     alert("All names have been used!");
                 }
-            },
+            },addToList() {
+                const bmi = parseFloat(this.calculateBMI);
+                const entry = {
+                    height: this.height,
+                    weight: this.weight,
+                    bmi: bmi.toFixed(1)
+                };
 
-        }
+                if (bmi < 18.5) {
+                    this.categorizedBMI.underweight.push(entry);
+                } else if (bmi >= 18.5 && bmi < 25) {
+                    this.categorizedBMI.normalWeight.push(entry);
+                } else {
+                    this.categorizedBMI.overweight.push(entry);
+                }
+            },
+            clearList() {
+                this.categorizedBMI = {
+                    underweight: [],
+                    normalWeight: [],
+                    overweight: []
+                };
+            }
+        },
+
+
     })
     app.mount('#app')
 </script>
