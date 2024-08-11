@@ -81,6 +81,8 @@
 
         <button @click="clearLists" class="btn btn-danger mt-3 m-2">Clear All Lists</button>
 
+        <button @click="generateRandomData" class="btn btn-info mt-3 m-2">Generate Random data </button>
+
 
 
         <div class="row mt-5">
@@ -150,7 +152,31 @@
                     "Emma", "Liam", "Olivia", "Noah", "Ava", "Ethan", "Sophia", "Mason",
                     "Isabella", "William", "Mia", "James", "Charlotte", "Benjamin", "Amelia",
                     "Lucas", "Harper", "Henry", "Evelyn", "Alexander", "Abigail", "Michael",
-                    "Emily", "Daniel", "Elizabeth", "Jacob", "Sofia", "Logan", "Avery", "Jackson"
+                    "Emily", "Daniel", "Elizabeth", "Jacob", "Sofia", "Logan", "Avery", "Jackson",
+                    "Ella", "Owen", "Scarlett", "Sebastian", "Grace", "Jack", "Chloe", "Samuel",
+                    "Lily", "David", "Zoe", "Joseph", "Penelope", "John", "Layla", "Luke",
+                    "Nora", "Andrew", "Hazel", "Christopher", "Victoria", "Isaac", "Aubrey",
+                    "Joshua", "Claire", "Nathan", "Aurora", "Ryan", "Zoey", "Wyatt", "Hannah",
+                    "Gabriel", "Stella", "Julian", "Leah", "Jaxon", "Ellie", "Levi", "Violet",
+                    "Isaiah", "Lucy", "Eli", "Savannah", "Oliver", "Audrey", "Aaron", "Bella",
+                    "Charles", "Skylar", "Thomas", "Paisley", "Caleb", "Maya", "Josiah", "Addison",
+                    "Christian", "Madelyn", "Hunter", "Aaliyah", "Landon", "Ariana", "Jonathan",
+                    "Elena", "Grayson", "Gabriella", "Matthew", "Naomi", "Asher", "Alice",
+                    "Leo", "Sadie", "Robert", "Hailey", "Ezra", "Eva", "Connor", "Emilia",
+                    "Nicholas", "Autumn", "Jeremiah", "Quinn", "Elias", "Nevaeh", "Colton",
+                    "Piper", "Adrian", "Ruby", "Cameron", "Serenity", "Theodore", "Willow",
+                    "Hudson", "Everly", "Nolan", "Cora", "Austin", "Kaylee", "Easton", "Lydia",
+                    "Ian", "Aubree", "Carson", "Arianna", "Elijah", "Eliana", "Zachary", "Peyton",
+                    "Adam", "Melanie", "Gavin", "Gianna", "Brayden", "Isabelle", "Dominic", "Julia",
+                    "Lincoln", "Valentina", "Jace", "Nova", "Everett", "Clara", "Micah", "Vivian",
+                    "Vincent", "Reagan", "Miles", "Mackenzie", "Axel", "Madeline",
+                    "Silas", "Natalie", "Jasper", "Brielle", "Declan", "Liliana", "Emmett", "Adeline",
+                    "Greyson", "Athena", "Sawyer", "Ivy", "Finn", "Isla", "Weston", "Leilani",
+                    "Bentley", "Ayla", "Zion", "Jordyn", "Maddox", "Delilah", "August", "Harmony",
+                    "Kai", "Kinsley", "Theo", "Keira", "Xander", "Gabrielle", "Arthur", "Khloe",
+                    "Felix", "Genevieve", "Atticus", "Thea", "Oscar", "Emery", "Malachi", "Josephine",
+                    "Ezekiel", "Iris", "Caden", "Anastasia", "Blake", "Tessa", "Rowan", "Finley",
+                    "Aiden", "Mila", "Callum", "Esther", "Rhett", "Daisy", "Ryder", "Freya"
                 ],
                 sliderHeight: 170,
                 sliderWeight: 70,
@@ -220,6 +246,47 @@
                     alert("All names have been used!");
                 }
             },
+            generateRandomData() {
+                const usedNames = new Set();
+                for (let i = 0; i < 150; i++) {
+                    // Generate random name
+                    let name;
+                    do {
+                        name = this.names[Math.floor(Math.random() * this.names.length)];
+                    } while (usedNames.has(name));
+                    usedNames.add(name);
+
+                    // Generate random height (130-220 cm)
+                    const height = Math.floor(Math.random() * (220 - 130 + 1)) + 130;
+
+                    // Generate random weight (40-150 kg)
+                    const weight = Math.floor(Math.random() * (150 - 40 + 1)) + 40;
+
+                    // Calculate BMI
+                    const heightInMeters = height / 100;
+                    const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+
+                    // Create item object
+                    const item = {
+                        name: name,
+                        height: height,
+                        weight: weight,
+                        bmi: bmi
+                    };
+
+                    // Add to appropriate list
+                    if (bmi < 18.5) {
+                        this.underweightList.push(item);
+                    } else if (bmi < 25) {
+                        this.normalWeightList.push(item);
+                    } else if (bmi < 30) {
+                        this.overweightList.push(item);
+                    } else {
+                        this.obeseList.push(item);
+                    }
+                }
+            },
+
         }
     });
 
