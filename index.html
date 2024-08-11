@@ -79,7 +79,7 @@
 
         <button @click="addToList" class="btn btn-primary mt-3 m-2" :disabled="!name">Add to List</button>
 
-        <button @click="clearList" class="btn btn-primary mt-3 m-2" :disabled="!name">Clear List</button>
+        <button @click="clearLists" class="btn btn-danger mt-3 m-2">Clear All Lists</button>
 
         <div class="row mt-5 mx-auto">
             <div class="col-md-6">
@@ -182,15 +182,11 @@
 
                 this.name = ''; // Clear the name input after adding to the list
             },
-            clearList(){
-
-                this.bmi = {
-                    underweightList: [],
-                    normalWeightList: [],
-                    overweightList: [],
-                    obeseList: []
-                };
-
+            clearLists() {
+                this.underweightList = [];
+                this.normalWeightList = [];
+                this.overweightList = [];
+                this.obeseList = [];
 
             },
             generateName() {
