@@ -36,8 +36,8 @@
         <div class="ct2 mt-3 d-flex justify-content-center align-items-center mx-auto"
              @mousemove="mousePos"
              @click="captureData"
-             :style="{backgroundColor:'hsl('+xPos+',80%,80%)'}"
-             style="height: 200px;width: 200px;">
+             :style="{backgroundColor:'hsl('+xPos+bgColor+',80%,80%)'}"
+             style="height: 200px;width: 200px;" >
         </div>
         <div v-if="clickedHeight && clickedWeight" class="mt-3">
             <p>Selected - Height: {{ clickedHeight }} cm</p>
@@ -104,6 +104,8 @@
     const app = Vue.createApp({
         data() {
             return {
+                bgColor: 0,
+                intervalId: null,
                 xPos: 0,
                 yPos: 0,
                 maxYPos: 200,
@@ -171,6 +173,14 @@
                 } else {
                     alert("All names have been used!");
                 }
+            },
+            startColorChange() {
+                this.intervalId = setInterval(() => {
+                    this.changeColor();
+                }, 100); // Change color every 1000ms (1 second)
+            },
+            changeColor() {
+                this.bgColor = (this.bgColor + 10) % 360;
             },
         }
     });
