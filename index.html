@@ -61,6 +61,8 @@
                 <strong>BMI: {{calculateBMI2}}</strong>
             </p>
 
+
+
         </div>
 
 <!--        <button @click="calculateBMI" class="btn btn-primary mt-3" :disabled="!name">Calculate BMI</button>-->
@@ -72,51 +74,48 @@
 <!--        -->
 
 
-    </div>
-</div>
+        <div class=" col-12 col-sm-12">
+            <div class="button-group">
+                <button @click="addToList">Add to List</button>
+                <button @click="clearList">Clear List</button>
+            </div>
 
-<div class="container">
-    <div id="app2">
-    <div class="col-12 col-sm-12">
-        <div class="button-group">
-            <button @click="addToList">Add to List</button>
-            <button @click="clearList">Clear List</button>
-        </div>
+            <div class="bmiCategoryContainer">
+                <div class="row justify-content-center">
+                    <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
+                        <h3>Underweight (BMI < 18.5)</h3>
+                        <ul>
+                            <li v-for="(item, index) in categorizedBMI.underweight" :key="'underweight-'+index">
+                                Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
+                            </li>
+                        </ul>
+                    </div>
 
-        <div class="bmiCategoryContainer">
-            <div class="row justify-content-center">
-                <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
-                    <h3>Underweight (BMI < 18.5)</h3>
-                    <ul>
-                        <li v-for="(item, index) in categorizedBMI.underweight" :key="'underweight-'+index">
-                            Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
-                        </li>
-                    </ul>
-                </div>
+                    <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
+                        <h3>Normal Weight (18.5 ≤ BMI < 25)</h3>
+                        <ul>
+                            <li v-for="(item, index) in categorizedBMI.normalWeight" :key="'normal-'+index">
+                                Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
+                            </li>
+                        </ul>
+                    </div>
 
-                <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
-                    <h3>Normal Weight (18.5 ≤ BMI < 25)</h3>
-                    <ul>
-                        <li v-for="(item, index) in categorizedBMI.normalWeight" :key="'normal-'+index">
-                            Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
-                    <h3>Overweight (BMI ≥ 25)</h3>
-                    <ul>
-                        <li v-for="(item, index) in categorizedBMI.overweight" :key="'overweight-'+index">
-                            Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
-                        </li>
-                    </ul>
+                    <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
+                        <h3>Overweight (BMI ≥ 25)</h3>
+                        <ul>
+                            <li v-for="(item, index) in categorizedBMI.overweight" :key="'overweight-'+index">
+                                Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </div>
 </div>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
