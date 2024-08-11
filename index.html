@@ -39,6 +39,32 @@
         .ct1{
             margin-top: 10rem;
         }
+        .udw li{
+            background: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTN0ZjUzMTJ1a2JkMmtuejlpeWZsZzhkOTJuMWxsamx2OTlsZXFxZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT5LMslGplcLCDmHaE/giphy.gif");
+            background-size: 60%;
+            border: rgba(22,33,44,0.5) solid 2px;
+            font-weight: 800;
+            color: rgba(234, 234, 234, 0.6);
+        }
+        .nw li{
+            background: url("https://media.giphy.com/media/5o7DwZs8jSQhi/giphy.gif?cid=790b76116malxejg21f2o6m6ghn9aecqw7j3pgbl7lcvf4ur&ep=v1_gifs_search&rid=giphy.gif&ct=g");
+            background-size: 50%;
+            border: rgba(22,33,44,0.5) solid 2px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .ow li{
+            background: url("https://media.giphy.com/media/cdtnU46YTOMTe/giphy.gif?cid=790b7611og47479d7x6pnvtou62osuubv0dwt5fhheg6erwr&ep=v1_gifs_search&rid=giphy.gif&ct=g");
+            background-size: 50%;
+            border: rgba(22,33,44,0.5) solid 2px;
+            color:rgba(255,255,255,0.8);
+        }
+        .ob li{
+            background: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2c0NzQ3OWQ3eDZwbnZ0b3U2Mm9zdXVidjBkd3Q1ZmhoZWc2ZXJ3ciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT5LMDLQcTyvpdBGNO/giphy.gif");
+            background-size: 80%;
+            border: rgba(22,33,44,0.5) solid 2px ;
+            color:rgba(255,255,255,0.8);
+        }
     </style>
 </head>
 <body>
@@ -86,7 +112,7 @@
 
 
         <div class="row mt-5">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3 ">
+            <div class="udw col-12 col-sm-12 col-md-6 col-lg-3 ">
                 <h4>Underweight</h4>
                 <ul class="list-group bmi-list">
                     <li v-for="item in underweightList" :key="item.name" class="list-group-item">
@@ -97,7 +123,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+            <div class="nw col-12 col-sm-12 col-md-6 col-lg-3">
                 <h4>Normal weight</h4>
                 <ul class="list-group bmi-list">
                     <li v-for="item in normalWeightList" :key="item.name" class="list-group-item">
@@ -108,7 +134,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+            <div class="ow col-12 col-sm-12 col-md-6 col-lg-3">
                 <h4>Overweight</h4>
                 <ul class="list-group bmi-list">
                     <li v-for="item in overweightList" :key="item.name" class="list-group-item">
@@ -119,7 +145,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+            <div class="ob col-12 col-sm-12 col-md-6 col-lg-3">
                 <h4>Obese</h4>
                 <ul class="list-group bmi-list">
                     <li v-for="item in obeseList" :key="item.name" class="list-group-item">
