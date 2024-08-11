@@ -7,10 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
-            align-content: center;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
             background: #888888;
         }
         .ct2 {
@@ -22,22 +18,25 @@
             width: 200px;
             cursor: pointer;
         }
+        .bmi-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
 
-<div class="container mt-5 d-flex justify-content-center align-items-center">
+<div class="container mt-5">
     <div id="app">
-
-        <p >Move the mouse pointer over the box below and click to select height and weight:</p>
+        <p>Move the mouse pointer over the box below and click to select height and weight:</p>
         <div>
             <span>Current - Height ↕ : {{ yPos }} cm </span>
             <span>Current - Weight ↔ : {{ xPos }} kg </span><br>
         </div>
         <div class="ct2 mt-3 d-flex justify-content-center align-items-center mx-auto"
-             v-on:mousemove="mousePos"
-             v-on:click="captureData"
-             v-bind:style="{backgroundColor:'hsl('+xPos+',80%,80%)'}"
+             @mousemove="mousePos"
+             @click="captureData"
+             :style="{backgroundColor:'hsl('+xPos+',80%,80%)'}"
              style="height: 200px;width: 200px;">
         </div>
         <div v-if="clickedHeight && clickedWeight" class="mt-3">
@@ -45,7 +44,6 @@
             <p>Selected - Weight: {{ clickedWeight }} kg</p>
         </div>
 
-        <!-- New range sliders for height and weight -->
         <div class="mt-3">
             <div class="mb-3">
                 <input v-model="name" type="text" class="form-control" placeholder="Enter your name">
@@ -58,69 +56,50 @@
             <input type="range" class="form-range" id="weightSlider" v-model="sliderWeight" min="30" max="200">
 
             <p>
-                <strong>BMI: {{calculateBMI2}}</strong>
+                <strong>BMI: {{ calculateBMI2 }}</strong>
             </p>
-
-
-
         </div>
 
-<!--        <button @click="calculateBMI" class="btn btn-primary mt-3" :disabled="!name">Calculate BMI</button>-->
-<!--        <div v-if="bmi" class="mt-3">-->
-<!--            <h3>BMI Result for {{ name }}</h3>-->
-<!--            <p>Your BMI: {{ bmi.toFixed(2) }}</p>-->
-<!--            <p>Category: {{ bmiCategory }}</p>-->
-<!--        </div>-->
-<!--        -->
+        <button @click="addToList" class="btn btn-primary mt-3" :disabled="!name">Add to List</button>
 
-
-        <div class=" col-12 col-sm-12">
-            <div class="button-group">
-                <button @click="addToList">Add to List</button>
-                <button @click="clearList">Clear List</button>
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <h4>Underweight</h4>
+                <ul class="list-group bmi-list">
+                    <li v-for="item in underweightList" :key="item.name" class="list-group-item">
+                        {{ item.name }} - BMI: {{ item.bmi }}
+                    </li>
+                </ul>
             </div>
-
-            <div class="bmiCategoryContainer">
-                <div class="row justify-content-center">
-                    <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
-                        <h3>Underweight (BMI < 18.5)</h3>
-                        <ul>
-                            <li v-for="(item, index) in categorizedBMI.underweight" :key="'underweight-'+index">
-                                Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
-                        <h3>Normal Weight (18.5 ≤ BMI < 25)</h3>
-                        <ul>
-                            <li v-for="(item, index) in categorizedBMI.normalWeight" :key="'normal-'+index">
-                                Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="bmi-category col-12 col-sm-12 col-lg-3 ">
-                        <h3>Overweight (BMI ≥ 25)</h3>
-                        <ul>
-                            <li v-for="(item, index) in categorizedBMI.overweight" :key="'overweight-'+index">
-                                Height: {{item.height}}cm, Weight: {{item.weight}}kg, BMI: {{item.bmi}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="col-md-3">
+                <h4>Normal weight</h4>
+                <ul class="list-group bmi-list">
+                    <li v-for="item in normalWeightList" :key="item.name" class="list-group-item">
+                        {{ item.name }} - BMI: {{ item.bmi }}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Overweight</h4>
+                <ul class="list-group bmi-list">
+                    <li v-for="item in overweightList" :key="item.name" class="list-group-item">
+                        {{ item.name }} - BMI: {{ item.bmi }}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Obese</h4>
+                <ul class="list-group bmi-list">
+                    <li v-for="item in obeseList" :key="item.name" class="list-group-item">
+                        {{ item.name }} - BMI: {{ item.bmi }}
+                    </li>
+                </ul>
             </div>
         </div>
-
     </div>
 </div>
 
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
 <script>
     const app = Vue.createApp({
         data() {
@@ -128,8 +107,6 @@
                 xPos: 0,
                 yPos: 0,
                 maxYPos: 200,
-                bmi: null,
-                bmiCategory: '',
                 clickedHeight: null,
                 clickedWeight: null,
                 name: '',
@@ -140,7 +117,11 @@
                     "Emily", "Daniel", "Elizabeth", "Jacob", "Sofia", "Logan", "Avery", "Jackson"
                 ],
                 sliderHeight: 170,
-                sliderWeight: 70
+                sliderWeight: 70,
+                underweightList: [],
+                normalWeightList: [],
+                overweightList: [],
+                obeseList: []
             }
         },
         computed: {
@@ -156,9 +137,9 @@
                 const height = rect.height;
                 const width = rect.width;
 
-                this.xPos = Math.round((event.offsetX / width) * 150) + 50; // Weight range: 30-180 kg
+                this.xPos = Math.round((event.offsetX / width) * 150) + 50;
                 const invertedPercentage = (1 - (event.offsetY / height)) * 100;
-                this.yPos = Math.round((invertedPercentage / 100) * 120) + 130; // Height range: 130-250 cm
+                this.yPos = Math.round((invertedPercentage / 100) * 120) + 130;
             },
             captureData(event) {
                 this.clickedHeight = this.yPos;
@@ -166,21 +147,21 @@
                 this.sliderHeight = this.clickedHeight;
                 this.sliderWeight = this.clickedWeight;
             },
-            calculateBMI() {
-                const heightInMeters = this.sliderHeight / 100;
-                this.bmi = this.sliderWeight / (heightInMeters * heightInMeters);
-                this.setBMICategory();
-            },
-            setBMICategory() {
-                if (this.bmi < 18.5) {
-                    this.bmiCategory = 'Underweight';
-                } else if (this.bmi < 25) {
-                    this.bmiCategory = 'Normal weight';
-                } else if (this.bmi < 30) {
-                    this.bmiCategory = 'Overweight';
+            addToList() {
+                const bmi = parseFloat(this.calculateBMI2);
+                const item = { name: this.name, bmi: bmi };
+
+                if (bmi < 18.5) {
+                    this.underweightList.push(item);
+                } else if (bmi < 25) {
+                    this.normalWeightList.push(item);
+                } else if (bmi < 30) {
+                    this.overweightList.push(item);
                 } else {
-                    this.bmiCategory = 'Obese';
+                    this.obeseList.push(item);
                 }
+
+                this.name = ''; // Clear the name input after adding to the list
             },
             generateName() {
                 if (this.names.length > 0) {
@@ -190,34 +171,11 @@
                 } else {
                     alert("All names have been used!");
                 }
-            },addToList() {
-                const bmi = parseFloat(this.calculateBMI);
-                const entry = {
-                    height: this.height,
-                    weight: this.weight,
-                    bmi: bmi.toFixed(1)
-                };
-
-                if (bmi < 18.5) {
-                    this.categorizedBMI.underweight.push(entry);
-                } else if (bmi >= 18.5 && bmi < 25) {
-                    this.categorizedBMI.normalWeight.push(entry);
-                } else {
-                    this.categorizedBMI.overweight.push(entry);
-                }
             },
-            clearList() {
-                this.categorizedBMI = {
-                    underweight: [],
-                    normalWeight: [],
-                    overweight: []
-                };
-            }
-        },
+        }
+    });
 
-
-    })
-    app.mount('#app')
+    app.mount('#app');
 </script>
 
 </body>
