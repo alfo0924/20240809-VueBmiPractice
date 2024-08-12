@@ -111,6 +111,36 @@
             height: 300px;
             margin-top: 150px;
         }
+        .clearListBtn:hover{
+            background: rgba(255,0,0,0.8);
+            border: rgba(255,0,0,0.9) solid 3px;
+            font-size: 15px;
+            font-weight: 800;
+            transition: 0.3s;
+        }
+        .clearListBtn{
+            transition: 1.3s;
+        }
+        .gnRandomBtn:hover{
+            background: rgba(245, 245, 245, 0.7);
+            color: rgba(38, 38, 38, 0.5);
+            font-weight: 800;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        .gnRandomBtn{
+            transition: 1.3s;
+        }
+        .addListBtn:hover{
+            background: rgba(250, 247, 247, 0.9);
+            font-weight: 800;
+            font-size: 15px;
+            color: rgba(0, 57, 141, 0.94);
+            transition: 0.3s;
+        }
+        .addListBtn{
+            transition: 1.3s;
+        }
 
     </style>
 </head>
@@ -150,7 +180,7 @@
         <div class="inputSection mt-3 mx-auto">
             <div class="mb-3">
                 <input v-model="name" type="text" class="form-control" placeholder="Enter your name">
-                <button @click="generateName" class="btn btn-secondary mt-3">隨機名字Generate Name</button>
+                <button @click="generateName" class="btn btn-secondary mt-3 gnRandomBtn ">隨機名字Generate Name</button>
             </div>
             <label for="heightSlider" class="form-label">身高Height: {{ sliderHeight }} cm</label>
             <input type="range" class="form-range" id="heightSlider" v-model="sliderHeight" min="120" max="250">
@@ -163,11 +193,11 @@
             </p>
         </div>
 
-        <button @click="addToList" class="btn btn-primary mt-3 m-2" :disabled="!name">加入列表 Add to List</button>
+        <button @click="addToList" class="btn btn-primary mt-3 m-2 addListBtn" :disabled="!name">加入列表 Add to List</button>
 
-        <button @click="clearLists" class="btn btn-danger mt-3 m-2">清除列表 Clear All Lists</button>
+        <button @click="clearLists" class="btn btn-danger mt-3 m-2 clearListBtn">清除列表 Clear All Lists</button>
 
-        <button @click="generateRandomData" class="btn btn-info mt-3 m-2">產生隨機資料 Generate Random data </button>
+        <button @click="generateRandomData" class="btn btn-secondary mt-3 m-2 gnRandomBtn ">產生隨機資料 Generate Random data </button>
 
 
 
